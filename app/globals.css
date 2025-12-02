@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-chocolate-950 text-cream-100;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gold-600 hover:bg-gold-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 border border-cream-200 hover:border-cream-300;
+  }
+  
+  .card {
+    @apply bg-chocolate-900 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-chocolate-800 hover:border-gold-600;
+  }
+  
+  .section-padding {
+    @apply py-16 px-4 md:px-8 lg:px-16;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent;
+  }
+  
+  .bg-gradient-chocolate {
+    @apply bg-gradient-to-br from-chocolate-900 via-chocolate-950 to-chocolate-950;
+  }
+}
