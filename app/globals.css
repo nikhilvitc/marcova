@@ -18,23 +18,28 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gold-600 hover:bg-gold-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105;
+    @apply bg-gold-600 hover:bg-gold-700 active:bg-gold-800 text-white px-5 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 text-sm md:text-base;
+    /* Larger touch target for mobile */
+    min-height: 44px;
+    min-width: 44px;
   }
   
   .btn-secondary {
-    @apply bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 px-6 py-3 rounded-lg font-semibold transition-all duration-300 border border-cream-200 hover:border-cream-300;
+    @apply bg-chocolate-800 hover:bg-chocolate-700 active:bg-chocolate-600 text-cream-100 px-5 py-3 md:px-6 md:py-3 rounded-lg font-semibold transition-all duration-300 border border-cream-200 hover:border-cream-300 text-sm md:text-base;
+    min-height: 44px;
+    min-width: 44px;
   }
   
   .card {
-    @apply bg-chocolate-900 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-chocolate-800 hover:border-gold-600;
+    @apply bg-chocolate-900 rounded-xl p-4 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 border border-chocolate-800 hover:border-gold-600;
   }
   
   .section-padding {
-    @apply py-16 px-4 md:px-8 lg:px-16;
+    @apply py-10 px-4 md:py-16 md:px-8 lg:px-16;
   }
   
   .container-custom {
-    @apply max-w-7xl mx-auto;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
 

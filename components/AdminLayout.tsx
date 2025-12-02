@@ -83,15 +83,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     <div className="min-h-screen bg-chocolate-950">
       {/* Top Bar with Logo, Navigation, and Logout */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-chocolate-900/95 backdrop-blur-sm shadow-lg border-b border-chocolate-800">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
+        <div className="container mx-auto px-3 sm:px-6">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
-            <Link href="/admin/dashboard" className="text-2xl font-display font-bold text-gradient hover:scale-105 transition-transform">
+            <Link href="/admin/dashboard" className="text-xl sm:text-2xl font-display font-bold text-gradient hover:scale-105 transition-transform">
               Marcova
             </Link>
 
             {/* Navigation Links */}
-            <nav className="flex items-center space-x-6">
+            <nav className="flex items-center space-x-1 sm:space-x-3 md:space-x-6">
               {navItems.map((item) => {
                 const Icon = item.icon
                 const isActive = pathname === item.href
@@ -99,14 +99,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    className={`flex items-center justify-center space-x-1 sm:space-x-2 px-2 sm:px-3 md:px-4 py-2 rounded-lg transition-all ${
                       isActive
                         ? 'bg-gold-600 text-white'
                         : 'text-cream-300 hover:bg-chocolate-800 hover:text-cream-100'
                     }`}
+                    style={{ minHeight: '44px', minWidth: '44px' }}
                   >
-                    <Icon size={18} />
-                    <span className="hidden md:inline">{item.label}</span>
+                    <Icon size={18} className="sm:text-lg" />
+                    <span className="hidden lg:inline text-sm">{item.label}</span>
                   </Link>
                 )
               })}
@@ -115,18 +116,19 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             {/* Logout Button */}
             <button
               onClick={handleLogout}
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-chocolate-800 text-cream-300 hover:bg-chocolate-700 hover:text-red-400 transition-all"
+              className="flex items-center justify-center space-x-1 sm:space-x-2 px-2 sm:px-3 md:px-4 py-2 rounded-lg bg-chocolate-800 text-cream-300 hover:bg-chocolate-700 hover:text-red-400 transition-all active:scale-95"
+              style={{ minHeight: '44px', minWidth: '44px' }}
             >
-              <FiLogOut />
-              <span className="hidden md:inline">Logout</span>
+              <FiLogOut size={18} />
+              <span className="hidden sm:inline text-sm">Logout</span>
             </button>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="w-full pt-20">
-        <div className="p-6">{children}</div>
+      <main className="w-full pt-16 sm:pt-20">
+        <div className="p-3 sm:p-4 md:p-6">{children}</div>
       </main>
     </div>
   )

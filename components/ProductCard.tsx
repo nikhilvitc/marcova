@@ -53,10 +53,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <motion.div
       whileHover={{ y: -8 }}
+      whileTap={{ scale: 0.98 }}
       className="card group"
     >
       <Link href={`/products/${product.id}`}>
-        <div className="relative w-full h-64 mb-4 rounded-lg overflow-hidden bg-chocolate-800 group-hover:bg-chocolate-700 transition-colors">
+        <div className="relative w-full h-48 sm:h-56 md:h-64 mb-3 md:mb-4 rounded-lg overflow-hidden bg-chocolate-800 group-hover:bg-chocolate-700 transition-colors">
           {product.image ? (
             <Image
               src={product.image}
@@ -66,7 +67,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-6xl">🍫</span>
+              <span className="text-5xl sm:text-6xl">🍫</span>
             </div>
           )}
         </div>
@@ -74,21 +75,22 @@ export default function ProductCard({ product }: ProductCardProps) {
       
       <div>
         <Link href={`/products/${product.id}`}>
-          <h3 className="text-xl font-display font-semibold mb-2 group-hover:text-gold-400 transition-colors">
+          <h3 className="text-lg sm:text-xl font-display font-semibold mb-2 group-hover:text-gold-400 transition-colors line-clamp-1">
             {product.name}
           </h3>
         </Link>
-        <p className="text-cream-300 text-sm mb-4 line-clamp-2">
+        <p className="text-cream-300 text-xs sm:text-sm mb-3 md:mb-4 line-clamp-2">
           {product.description}
         </p>
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-gold-500">₹{product.price}</span>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-xl sm:text-2xl font-bold text-gold-500">₹{product.price}</span>
           <button
             onClick={handleAddToCart}
-            className="bg-gold-600 hover:bg-gold-700 text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2"
+            className="bg-gold-600 hover:bg-gold-700 active:bg-gold-800 text-white px-3 sm:px-4 py-2 rounded-lg transition-all flex items-center gap-1 sm:gap-2 text-sm sm:text-base"
+            style={{ minHeight: '44px', minWidth: '44px' }}
           >
-            <FiShoppingCart />
-            <span className="hidden sm:inline">Add to Cart</span>
+            <FiShoppingCart className="text-lg" />
+            <span className="hidden sm:inline">Add</span>
           </button>
         </div>
       </div>

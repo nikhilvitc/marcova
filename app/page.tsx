@@ -79,9 +79,9 @@ export default function Home() {
   ]
 
   return (
-    <div className="pt-20">
+    <div className="pt-16 md:pt-20">
       {/* Hero Banner */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[70vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-chocolate opacity-90"></div>
         <div className="absolute inset-0 bg-[url('/images/hero-chocolate.jpg')] bg-cover bg-center opacity-30"></div>
 
@@ -89,19 +89,19 @@ export default function Home() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 text-center px-4"
+          className="relative z-10 text-center px-4 py-8"
         >
-          <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 text-cream-100">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-4 md:mb-6 text-cream-100 leading-tight">
             Welcome to <span className="text-gradient">Marcova</span>
           </h1>
-          <p className="text-xl md:text-2xl text-cream-200 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-cream-200 mb-6 md:mb-8 max-w-2xl mx-auto px-2">
             Premium handcrafted chocolates and celebration cakes, made with passion and finest ingredients
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/products" className="btn-primary inline-flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
+            <Link href="/products" className="btn-primary inline-flex items-center justify-center w-full sm:w-auto">
               Explore Products <FiArrowRight className="ml-2" />
             </Link>
-            <Link href="/about" className="btn-secondary inline-flex items-center justify-center">
+            <Link href="/about" className="btn-secondary inline-flex items-center justify-center w-full sm:w-auto">
               Our Story
             </Link>
           </div>
@@ -150,13 +150,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-8 md:mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Our Categories</h2>
-            <p className="text-cream-300 text-lg">Explore our diverse range of premium chocolates</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 md:mb-4 px-4">Our Categories</h2>
+            <p className="text-cream-300 text-base md:text-lg px-4">Explore our diverse range of premium chocolates</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {categories.map((category, index) => (
               <motion.div
                 key={category.name}
@@ -166,8 +166,8 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Link href={category.href} className="group block">
-                  <div className="card h-full text-center hover:scale-105">
-                    <div className="relative w-full h-48 bg-chocolate-800 rounded-lg mb-4 overflow-hidden group-hover:ring-2 group-hover:ring-gold-500 transition-all">
+                  <div className="card h-full text-center hover:scale-105 active:scale-95">
+                    <div className="relative w-full h-40 sm:h-48 bg-chocolate-800 rounded-lg mb-3 md:mb-4 overflow-hidden group-hover:ring-2 group-hover:ring-gold-500 transition-all">
                       <Image
                         src={category.image}
                         alt={category.name}
@@ -175,7 +175,7 @@ export default function Home() {
                         className="object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
-                    <h3 className="text-xl font-display font-semibold mb-2 group-hover:text-gold-400 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-display font-semibold mb-2 group-hover:text-gold-400 transition-colors px-2">
                       {category.name}
                     </h3>
                   </div>

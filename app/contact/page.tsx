@@ -34,23 +34,23 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="pt-20 min-h-screen bg-chocolate-950">
+    <div className="pt-16 md:pt-20 min-h-screen bg-chocolate-950">
       <div className="section-padding">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center mb-8 md:mb-12 px-4"
           >
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 md:mb-4">
               Get in <span className="text-gradient">Touch</span>
             </h1>
-            <p className="text-cream-300 text-lg max-w-2xl mx-auto">
+            <p className="text-cream-300 text-base md:text-lg max-w-2xl mx-auto">
               Have a question or want to place a custom order? We'd love to hear from you!
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -58,8 +58,8 @@ export default function ContactPage() {
               transition={{ duration: 0.6 }}
             >
               <div className="card">
-                <h2 className="text-2xl font-display font-bold mb-6">Send us a Message</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <h2 className="text-xl sm:text-2xl font-display font-bold mb-4 md:mb-6">Send us a Message</h2>
+                <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
                   <div>
                     <input
                       type="text"
@@ -67,7 +67,8 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors"
+                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 md:py-4 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors text-base"
+                      style={{ minHeight: '44px', fontSize: '16px' }}
                     />
                   </div>
                   <div>
@@ -77,7 +78,8 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors"
+                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 md:py-4 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors text-base"
+                      style={{ minHeight: '44px', fontSize: '16px' }}
                     />
                   </div>
                   <div>
