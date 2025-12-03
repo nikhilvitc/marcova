@@ -69,6 +69,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { href: '/admin/products', label: 'Products', icon: FiPackage },
     { href: '/admin/orders', label: 'Orders', icon: FiShoppingBag },
     { href: '/admin/inquiries', label: 'Inquiries', icon: FiMail },
+    { href: '/admin/settings', label: 'Site Settings', icon: FiHome },
   ]
 
   if (loading) {

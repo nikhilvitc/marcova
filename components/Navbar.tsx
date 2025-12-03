@@ -5,13 +5,66 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { FiMenu, FiX, FiShoppingCart } from 'react-icons/fi'
+import { supabase } from '@/lib/supabase'
+
+interface MenuItem {
+  id: string
+  label: string
+  href: string
+  is_visible: boolean
+  display_order: number
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const [logoError, setLogoError] = useState(false)
+  const [navLinks, setNavLinks] = useState<MenuItem[]>([])
+  const [showCart, setShowCart] = useState(true)
   const pathname = usePathname()
+
+  // Fetch menu items from database
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('menu_items')
+          .select('*')
+          .eq('is_visible', true)
+          .order('display_order', { ascending: true })
+
+        if (error) {
+          console.error('Error fetching menu items:', error)
+          // Fallback to default menu items
+          setNavLinks([
+            { id: '1', href: '/', label: 'Home', is_visible: true, display_order: 1 },
+            { id: '2', href: '/products', label: 'Products', is_visible: true, display_order: 2 },
+            { id: '3', href: '/cakes', label: 'Cakes', is_visible: true, display_order: 3 },
+            { id: '4', href: '/about', label: 'About', is_visible: true, display_order: 4 },
+            { id: '5', href: '/contact', label: 'Contact', is_visible: true, display_order: 5 },
+          ])
+        } else {
+          setNavLinks(data || [])
+        }
+
+        // Fetch show_cart setting
+        const { data: settingsData } = await supabase
+          .from('site_settings')
+          .select('value')
+          .eq('key', 'show_cart')
+          .single()
+
+        if (settingsData) {
+          setShowCart(settingsData.value === 'true')
+        }
+      } catch (error) {
+        console.error('Error loading navigation:', error)
+      }
+    }
+
+    fetchMenuItems()
+  }, [])
 
   useEffect(() => {
     // Update cart count
@@ -45,14 +98,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/products', label: 'Products' },
-    { href: '/cakes', label: 'Cakes' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
-  ]
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -66,14 +111,14 @@ export default function Navbar() {
               <Image
                 src="/assets/images/logo.png"
                 alt="Marcova Logo"
-                width={150}
-                height={60}
-                className="h-12 w-auto group-hover:drop-shadow-[0_0_10px_rgba(255,195,0,0.5)] transition-all"
+                width={200}
+                height={80}
+                className="h-16 sm:h-20 md:h-24 w-auto group-hover:drop-shadow-[0_0_10px_rgba(255,195,0,0.5)] transition-all"
                 onError={() => setLogoError(true)}
                 priority
               />
             ) : (
-              <span className="text-3xl lg:text-4xl font-display font-bold text-gradient-animate tracking-wider">
+              <span className="text-4xl lg:text-5xl font-display font-bold text-gradient-animate tracking-wider">
                 MARCOVA
               </span>
             )}
@@ -97,32 +142,36 @@ export default function Navbar() {
             ))}
             
             {/* Cart Icon */}
-            <Link
-              href="/cart"
-              className="relative text-cream-50 hover:text-gold-400 transition-all duration-300 hover:scale-110 transform"
-            >
-              <FiShoppingCart size={24} className="drop-shadow-lg" />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-gold-400 to-gold-600 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg shadow-gold-500/50 animate-pulse">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+            {showCart && (
+              <Link
+                href="/cart"
+                className="relative text-cream-50 hover:text-gold-400 transition-all duration-300 hover:scale-110 transform"
+              >
+                <FiShoppingCart size={24} className="drop-shadow-lg" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-gradient-to-r from-gold-400 to-gold-600 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg shadow-gold-500/50 animate-pulse">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button & Cart */}
           <div className="md:hidden flex items-center gap-4">
-            <Link
-              href="/cart"
-              className="relative text-cream-50 hover:text-gold-400 transition-all duration-300 hover:scale-110 transform"
-            >
-              <FiShoppingCart size={24} />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-gold-400 to-gold-600 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg shadow-gold-500/50 animate-pulse">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+            {showCart && (
+              <Link
+                href="/cart"
+                className="relative text-cream-50 hover:text-gold-400 transition-all duration-300 hover:scale-110 transform"
+              >
+                <FiShoppingCart size={24} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-gradient-to-r from-gold-400 to-gold-600 text-black text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg shadow-gold-500/50 animate-pulse">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            )}
             
             <button
               className="text-cream-50 hover:text-gold-400 transition-all duration-300 hover:scale-110 transform active:scale-95"
