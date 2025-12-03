@@ -102,7 +102,7 @@ export default function Home() {
           className="relative z-10 text-center px-4 py-8"
         >
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6 text-cream-50 leading-tight drop-shadow-2xl"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-5 md:mb-6 text-cream-50 leading-tight drop-shadow-2xl px-4"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -110,7 +110,7 @@ export default function Home() {
             Indulge In The Art Of <span className="text-gradient-animate">Homemade Chocolate</span>
           </motion.h1>
           <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-cream-200 mb-6 md:mb-8 max-w-3xl mx-auto px-2 drop-shadow-lg font-light"
+            className="text-base sm:text-lg md:text-xl text-cream-200 mb-8 md:mb-10 max-w-3xl mx-auto px-6 drop-shadow-lg font-light leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -118,7 +118,7 @@ export default function Home() {
             Premium handcrafted chocolates and celebration cakes, made with passion and finest ingredients
           </motion.p>
           <motion.div 
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
+            className="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center px-6 sm:px-4 max-w-md sm:max-w-none mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -141,26 +141,26 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-12"
+            className="text-center mb-10 md:mb-12 px-4"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gradient">Featured Products</h2>
-            <p className="text-cream-200 text-lg">Handpicked favorites from our collection</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4 text-gradient">Featured Products</h2>
+            <p className="text-cream-200 text-base sm:text-lg leading-relaxed">Handpicked favorites from our collection</p>
           </motion.div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-2">
             {featuredProducts.length > 0 ? (
               featuredProducts.map((product: any) => (
                 <ProductCard key={product._id} product={product} />
               ))
             ) : (
-              <div className="col-span-full text-center text-cream-400 py-12">
-                <p>Loading featured products...</p>
+              <div className="col-span-full text-center text-cream-400 py-16">
+                <p className="text-base">Loading featured products...</p>
               </div>
             )}
           </div>
 
-          <div className="text-center mt-12">
-            <Link href="/products" className="btn-primary inline-flex items-center">
+          <div className="text-center mt-10 md:mt-12 px-4">
+            <Link href="/products" className="btn-primary inline-flex items-center w-full sm:w-auto justify-center">
               View All Products <FiArrowRight className="ml-2" />
             </Link>
           </div>
@@ -175,13 +175,13 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8 md:mb-12"
+            className="text-center mb-8 md:mb-12 px-4"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 md:mb-4 px-4 text-gradient">Our Categories</h2>
-            <p className="text-cream-200 text-base md:text-lg px-4">Explore our diverse range of premium chocolates</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4 text-gradient">Our Categories</h2>
+            <p className="text-cream-200 text-base md:text-lg leading-relaxed">Explore our diverse range of premium chocolates</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-2">
             {categories.map((category, index) => (
               <motion.div
                 key={category.name}

@@ -114,43 +114,78 @@ export default function CartPage() {
     <div className="pt-20 min-h-screen bg-chocolate-950">
       <div className="section-padding">
         <div className="container-custom">
-          <h1 className="text-4xl md:text-5xl font-display font-bold mb-8">Shopping Cart</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-6 md:mb-8 px-4">Shopping Cart</h1>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-3 sm:space-y-4 px-2">
               {cart.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-chocolate-900 rounded-xl p-4 flex gap-4 items-center"
+                  className="bg-chocolate-900 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row gap-3 sm:gap-4"
                 >
-                  {/* Product Image */}
-                  <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-chocolate-800 flex-shrink-0">
-                    {item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-4xl">🍫</span>
+                  <div className="flex gap-3 sm:gap-4 items-start sm:items-center flex-1">
+                    {/* Product Image */}
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden bg-chocolate-800 flex-shrink-0">
+                      {item.image ? (
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-3xl sm:text-4xl">🍫</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Product Details */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-cream-100 mb-1 text-sm sm:text-base truncate">{item.name}</h3>
+                      <p className="text-gold-500 font-bold text-sm sm:text-base">₹{item.price}</p>
+                      
+                      {/* Mobile: Quantity and Subtotal */}
+                      <div className="flex items-center justify-between mt-2 sm:hidden">
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded transition-colors flex items-center justify-center text-lg font-bold"
+                          >
+                            -
+                          </button>
+                          <span className="text-cream-100 font-semibold min-w-[2rem] text-center">
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded transition-colors flex items-center justify-center text-lg font-bold"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <p className="text-cream-100 font-bold">
+                          ₹{(item.price * item.quantity).toFixed(2)}
+                        </p>
                       </div>
-                    )}
+                    </div>
+
+                    {/* Remove Button - Mobile */}
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="text-red-400 hover:text-red-300 transition-colors p-2 sm:hidden self-start"
+                      title="Remove item"
+                    >
+                      <FiTrash2 className="w-5 h-5" />
+                    </button>
                   </div>
 
-                  {/* Product Details */}
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-cream-100 mb-1">{item.name}</h3>
-                    <p className="text-gold-500 font-bold">₹{item.price}</p>
-                  </div>
-
-                  {/* Quantity Controls */}
-                  <div className="flex items-center gap-2">
+                  {/* Desktop: Quantity Controls */}
+                  <div className="hidden sm:flex items-center gap-2">
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                      className="w-8 h-8 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded transition-colors"
+                      className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded transition-colors flex items-center justify-center text-lg font-bold"
                     >
                       -
                     </button>
@@ -159,23 +194,23 @@ export default function CartPage() {
                     </span>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                      className="w-8 h-8 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded transition-colors"
+                      className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded transition-colors flex items-center justify-center text-lg font-bold"
                     >
                       +
                     </button>
                   </div>
 
-                  {/* Subtotal */}
-                  <div className="text-right">
+                  {/* Desktop: Subtotal */}
+                  <div className="hidden sm:block text-right">
                     <p className="text-cream-100 font-bold">
                       ₹{(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
 
-                  {/* Remove Button */}
+                  {/* Desktop: Remove Button */}
                   <button
                     onClick={() => removeItem(item.id)}
-                    className="text-red-400 hover:text-red-300 transition-colors p-2"
+                    className="hidden sm:block text-red-400 hover:text-red-300 transition-colors p-2"
                     title="Remove item"
                   >
                     <FiTrash2 className="w-5 h-5" />
@@ -185,20 +220,20 @@ export default function CartPage() {
             </div>
 
             {/* Order Summary */}
-            <div className="lg:col-span-1">
-              <div className="bg-chocolate-900 rounded-xl p-6 sticky top-24">
-                <h2 className="text-2xl font-display font-bold mb-4">Order Summary</h2>
+            <div className="lg:col-span-1 px-2">
+              <div className="bg-chocolate-900 rounded-xl p-4 sm:p-6 lg:sticky lg:top-24">
+                <h2 className="text-xl sm:text-2xl font-display font-bold mb-4">Order Summary</h2>
                 
                 <div className="space-y-3 mb-6">
-                  <div className="flex justify-between text-cream-300">
+                  <div className="flex justify-between text-cream-300 text-sm sm:text-base">
                     <span>Subtotal</span>
                     <span>₹{getTotal().toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-cream-300">
+                  <div className="flex justify-between text-cream-300 text-sm sm:text-base">
                     <span>Delivery</span>
                     <span>Free</span>
                   </div>
-                  <div className="border-t border-chocolate-700 pt-3 flex justify-between text-xl font-bold">
+                  <div className="border-t border-chocolate-700 pt-3 flex justify-between text-lg sm:text-xl font-bold">
                     <span>Total</span>
                     <span className="text-gold-500">₹{getTotal().toFixed(2)}</span>
                   </div>
@@ -213,7 +248,7 @@ export default function CartPage() {
 
                 <button
                   onClick={handleWhatsAppOrder}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 min-h-[48px] text-sm sm:text-base"
                 >
                   <FaWhatsapp size={20} />
                   Order via WhatsApp
@@ -221,7 +256,7 @@ export default function CartPage() {
 
                 <Link
                   href="/products"
-                  className="block text-center text-cream-400 hover:text-cream-200 mt-4 transition-colors"
+                  className="block text-center text-cream-400 hover:text-cream-200 mt-4 transition-colors text-sm sm:text-base"
                 >
                   Continue Shopping
                 </Link>

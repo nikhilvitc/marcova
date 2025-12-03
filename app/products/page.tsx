@@ -74,18 +74,18 @@ function ProductsContent() {
     <div className="pt-20 min-h-screen bg-chocolate-950">
       <div className="section-padding">
         <div className="container-custom">
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 text-center">
+          <div className="mb-6 md:mb-8 px-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 md:mb-4 text-center">
               Our <span className="text-gradient">Products</span>
             </h1>
-            <p className="text-cream-300 text-center text-lg">
+            <p className="text-cream-300 text-center text-base sm:text-lg leading-relaxed">
               Discover our premium collection of handcrafted chocolates
             </p>
           </div>
 
           {/* Filters */}
-          <div className="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="flex flex-wrap gap-4 w-full md:w-auto">
+          <div className="mb-6 md:mb-8 flex flex-col gap-4 px-2">
+            <div className="flex flex-wrap gap-2 sm:gap-3 justify-center md:justify-start">
               {categories.map((category) => (
                 <button
                   key={category.value}
@@ -93,7 +93,7 @@ function ProductsContent() {
                     setSelectedCategory(category.value)
                     fetchProducts(category.value)
                   }}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-3 sm:px-4 py-2.5 sm:py-2 rounded-lg font-medium transition-all text-sm sm:text-base min-h-[48px] ${
                     selectedCategory === category.value
                       ? 'bg-gold-600 text-white'
                       : 'bg-chocolate-800 text-cream-200 hover:bg-chocolate-700'
@@ -104,11 +104,11 @@ function ProductsContent() {
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex justify-center md:justify-end">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-chocolate-800 text-cream-200 px-4 py-2 rounded-lg border border-chocolate-700"
+                className="bg-chocolate-800 text-cream-200 px-4 py-2.5 rounded-lg border border-chocolate-700 w-full sm:w-auto min-h-[48px] text-base"
               >
                 <option value="name">Sort by Name</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -119,18 +119,18 @@ function ProductsContent() {
 
           {/* Products Grid */}
           {loading ? (
-            <div className="text-center py-20 text-cream-400">
-              <p>Loading products...</p>
+            <div className="text-center py-12 md:py-20 text-cream-400">
+              <p className="text-base sm:text-lg">Loading products...</p>
             </div>
           ) : sortedProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-2">
               {sortedProducts.map((product: any) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 text-cream-400">
-              <p>No products found in this category.</p>
+            <div className="text-center py-12 md:py-20 text-cream-400">
+              <p className="text-base sm:text-lg">No products found in this category.</p>
             </div>
           )}
         </div>

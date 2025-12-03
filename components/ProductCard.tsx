@@ -96,8 +96,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           <span className="text-xl sm:text-2xl font-bold text-gradient-animate">₹{product.price}</span>
           <button
             onClick={handleAddToCart}
-            className="bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-700 active:from-gold-600 active:to-gold-800 text-black font-bold px-3 sm:px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base shadow-lg shadow-gold-500/40 hover:shadow-xl hover:shadow-gold-500/60 hover:scale-110 active:scale-95 relative overflow-hidden group"
-            style={{ minHeight: '44px', minWidth: '44px' }}
+            className="bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-700 active:from-gold-600 active:to-gold-800 text-black font-bold px-3 sm:px-4 py-2.5 rounded-full transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base shadow-lg shadow-gold-500/40 hover:shadow-xl hover:shadow-gold-500/60 hover:scale-110 active:scale-95 relative overflow-hidden group"
+            style={{ minHeight: '48px', minWidth: '48px' }}
           >
             <FiShoppingCart className="text-lg relative z-10" />
             <span className="hidden sm:inline relative z-10">Add</span>

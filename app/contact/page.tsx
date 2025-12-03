@@ -100,7 +100,8 @@ export default function ContactPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       required
-                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors"
+                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 md:py-4 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors text-base"
+                      style={{ minHeight: '48px', fontSize: '16px' }}
                     />
                   </div>
                   <div>
@@ -110,7 +111,8 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       required
-                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors"
+                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 md:py-4 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors text-base"
+                      style={{ minHeight: '48px', fontSize: '16px' }}
                     />
                   </div>
                   <div>
@@ -119,8 +121,9 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
-                      rows={6}
-                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors resize-none"
+                      rows={5}
+                      className="w-full bg-chocolate-800 text-cream-100 px-4 py-3 rounded-lg border border-chocolate-700 focus:border-gold-600 focus:outline-none transition-colors resize-none text-base"
+                      style={{ minHeight: '120px', fontSize: '16px' }}
                     />
                   </div>
                   <button
@@ -142,30 +145,30 @@ export default function ContactPage() {
               className="space-y-6"
             >
               <div className="card">
-                <h2 className="text-2xl font-display font-bold mb-6">Contact Information</h2>
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <FiMapPin className="w-6 h-6 text-gold-500 mt-1" />
+                <h2 className="text-xl sm:text-2xl font-display font-bold mb-4 md:mb-6">Contact Information</h2>
+                <div className="space-y-4 md:space-y-5">
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <FiMapPin className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500 mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold mb-1">Address</h3>
-                      <p className="text-cream-300">
+                      <h3 className="font-semibold mb-1 text-sm sm:text-base">Address</h3>
+                      <p className="text-cream-300 text-sm sm:text-base">
                         Kolkata, West Bengal<br />
                         India
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-start space-x-4">
-                    <FiPhone className="w-6 h-6 text-gold-500 mt-1" />
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <FiPhone className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500 mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold mb-1">Phone</h3>
-                      <p className="text-cream-300">+91 9876543210</p>
+                      <h3 className="font-semibold mb-1 text-sm sm:text-base">Phone</h3>
+                      <p className="text-cream-300 text-sm sm:text-base">+91 9876543210</p>
                     </div>
                   </div>
-                  <div className="flex items-start space-x-4">
-                    <FiMail className="w-6 h-6 text-gold-500 mt-1" />
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <FiMail className="w-5 h-5 sm:w-6 sm:h-6 text-gold-500 mt-1 flex-shrink-0" />
                     <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-cream-300">marcovachocolates@gmail.com</p>
+                      <h3 className="font-semibold mb-1 text-sm sm:text-base">Email</h3>
+                      <p className="text-cream-300 text-sm sm:text-base break-all">marcovachocolates@gmail.com</p>
                     </div>
                   </div>
                 </div>
@@ -173,7 +176,7 @@ export default function ContactPage() {
 
               {/* Google Map */}
               <div className="card p-0 overflow-hidden">
-                <div className="w-full h-64 bg-chocolate-800 flex items-center justify-center">
+                <div className="w-full h-56 sm:h-64 bg-chocolate-800 flex items-center justify-center">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.70707232826!2d88.18252539373378!3d22.535564937347626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1733247895123!5m2!1sen!2sin"
                     width="100%"

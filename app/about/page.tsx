@@ -31,12 +31,12 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
+            className="text-center max-w-3xl mx-auto px-4"
           >
-            <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 md:mb-6">
               Our <span className="text-gradient">Story</span>
             </h1>
-            <p className="text-xl text-cream-200 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-cream-200 leading-relaxed">
               Welcome to Markova, where passion meets craftsmanship in every bite.
             </p>
           </motion.div>
@@ -46,20 +46,20 @@ export default function AboutPage() {
       {/* Story Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-16 px-4">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl font-display font-bold mb-6">The Markova Journey</h2>
-              <p className="text-cream-300 text-lg mb-4 leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mb-4 md:mb-6">The Markova Journey</h2>
+              <p className="text-cream-300 text-base sm:text-lg mb-3 md:mb-4 leading-relaxed">
                 Markova was born from a simple belief: that chocolate should be more than just a sweet treat—it should be
                 an experience that celebrates life's most precious moments. Our journey began when we discovered the art
                 of handcrafted chocolates and saw an opportunity to share something truly special with the world.
               </p>
-              <p className="text-cream-300 text-lg mb-4 leading-relaxed">
+              <p className="text-cream-300 text-base sm:text-lg mb-3 md:mb-4 leading-relaxed">
                 What started as a small passion project has grown into a brand dedicated to creating premium chocolates
                 and celebration cakes that bring joy to every occasion. From birthdays to anniversaries, from Diwali to
                 Christmas, Markova is there to make your celebrations even sweeter.
@@ -70,7 +70,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative h-96 rounded-xl overflow-hidden bg-chocolate-800 p-12"
+              className="relative h-64 sm:h-80 md:h-96 rounded-xl overflow-hidden bg-chocolate-800 p-8 sm:p-10 md:p-12"
             >
               <div className="relative w-full h-full">
                 <Image 
@@ -85,19 +85,19 @@ export default function AboutPage() {
           </div>
 
           {/* Process Section */}
-          <div className="mb-16">
+          <div className="mb-12 md:mb-16 px-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center mb-8 md:mb-12"
             >
-              <h2 className="text-4xl font-display font-bold mb-4">Our Handmade Process</h2>
-              <p className="text-cream-300 text-lg">From bean to bar, every step is crafted with care</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold mb-3 md:mb-4">Our Handmade Process</h2>
+              <p className="text-cream-300 text-base sm:text-lg">From bean to bar, every step is crafted with care</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
               {[
                 {
                   step: '01',
