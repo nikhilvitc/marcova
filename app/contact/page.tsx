@@ -2,11 +2,9 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import axios from 'axios'
 import toast from 'react-hot-toast'
 import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'
+import { supabase } from '@/lib/supabase'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -23,10 +21,23 @@ export default function ContactPage() {
     setSubmitting(true)
     
     try {
-      await axios.post(`${API_URL}/inquiries`, formData)
+      const { error } = await supabase
+        .from('inquiries')
+        .insert([{
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+          status: 'pending'
+        }])
+      
+      if (error) throw error
+      
       toast.success('Thank you! Your inquiry has been sent. We will get back to you soon.')
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Error submitting inquiry:', error)
       toast.error('Failed to send inquiry. Please try again.')
     } finally {
       setSubmitting(false)
