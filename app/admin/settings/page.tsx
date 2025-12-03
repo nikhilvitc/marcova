@@ -89,7 +89,8 @@ export default function ComprehensiveSiteSettingsPage() {
     const newMenuItems = [...menuItems]
     ;[newMenuItems[currentIndex], newMenuItems[newIndex]] = [newMenuItems[newIndex], newMenuItems[currentIndex]]
     try {
-      for (const [index, item] of newMenuItems.entries()) {
+      for (let index = 0; index < newMenuItems.length; index++) {
+        const item = newMenuItems[index]
         await supabase.from('menu_items').update({ display_order: index + 1 }).eq('id', item.id)
       }
       setMenuItems(newMenuItems.map((item, index) => ({ ...item, display_order: index + 1 })))
