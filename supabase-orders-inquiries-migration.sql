@@ -1,6 +1,15 @@
 -- Supabase SQL Migration for Orders and Inquiries Tables
 -- Run this in: Supabase Dashboard > SQL Editor > New Query
 
+-- Create updated_at function if it doesn't exist
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
+
 -- Create orders table
 CREATE TABLE IF NOT EXISTS orders (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -23,7 +32,8 @@ CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_customer_email ON orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC);
 
--- Create updated_at trigger for orders
+-- Drop existing trigger if it exists, then create it
+DROP TRIGGER IF EXISTS update_orders_updated_at ON orders;
 CREATE TRIGGER update_orders_updated_at 
   BEFORE UPDATE ON orders 
   FOR EACH ROW 
@@ -106,7 +116,8 @@ CREATE INDEX IF NOT EXISTS idx_inquiries_status ON inquiries(status);
 CREATE INDEX IF NOT EXISTS idx_inquiries_email ON inquiries(email);
 CREATE INDEX IF NOT EXISTS idx_inquiries_created_at ON inquiries(created_at DESC);
 
--- Create updated_at trigger for inquiries
+-- Drop existing trigger if it exists, then create it
+DROP TRIGGER IF EXISTS update_inquiries_updated_at ON inquiries;
 CREATE TRIGGER update_inquiries_updated_at 
   BEFORE UPDATE ON inquiries 
   FOR EACH ROW 
