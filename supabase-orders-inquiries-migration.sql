@@ -42,6 +42,12 @@ CREATE TRIGGER update_orders_updated_at
 -- Enable Row Level Security (RLS) for orders
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Anyone can create orders" ON orders;
+DROP POLICY IF EXISTS "Users can view their own orders" ON orders;
+DROP POLICY IF EXISTS "Authenticated users can update orders" ON orders;
+DROP POLICY IF EXISTS "Authenticated users can delete orders" ON orders;
+
 -- Policy: Anyone can insert orders (for placing orders)
 CREATE POLICY "Anyone can create orders" 
   ON orders FOR INSERT 
@@ -125,6 +131,12 @@ CREATE TRIGGER update_inquiries_updated_at
 
 -- Enable Row Level Security (RLS) for inquiries
 ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Anyone can create inquiries" ON inquiries;
+DROP POLICY IF EXISTS "Anyone can view inquiries" ON inquiries;
+DROP POLICY IF EXISTS "Authenticated users can update inquiries" ON inquiries;
+DROP POLICY IF EXISTS "Authenticated users can delete inquiries" ON inquiries;
 
 -- Policy: Anyone can insert inquiries (for contact form)
 CREATE POLICY "Anyone can create inquiries" 
