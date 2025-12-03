@@ -86,6 +86,17 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('/images/hero-chocolate.jpg')] bg-cover bg-center opacity-20 animate-pulse"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-chocolate-950/80 via-transparent to-chocolate-950/80"></div>
         
+        {/* Chocolate image on the right side */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 md:w-2/5 h-full opacity-30 md:opacity-40 pointer-events-none">
+          <Image
+            src="/assets/images/choc.png"
+            alt="Chocolate decoration"
+            fill
+            className="object-contain object-right"
+            priority
+          />
+        </div>
+        
         {/* Floating particles effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute w-2 h-2 bg-gold-500/30 rounded-full animate-float" style={{top: '20%', left: '10%', animationDelay: '0s'}}></div>
