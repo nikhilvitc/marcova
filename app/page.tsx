@@ -81,9 +81,19 @@ export default function Home() {
   return (
     <div className="pt-16 md:pt-20">
       {/* Hero Banner */}
-      <section className="relative min-h-[70vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-chocolate opacity-90"></div>
-        <div className="absolute inset-0 bg-[url('/images/hero-chocolate.jpg')] bg-cover bg-center opacity-30"></div>
+      <section className="relative min-h-[70vh] md:h-[90vh] flex items-center justify-center overflow-hidden bg-black">
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-chocolate-900/50 to-black"></div>
+        <div className="absolute inset-0 bg-[url('/images/hero-chocolate.jpg')] bg-cover bg-center opacity-20 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/80"></div>
+        
+        {/* Floating particles effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-2 h-2 bg-gold-500/30 rounded-full animate-float" style={{top: '20%', left: '10%', animationDelay: '0s'}}></div>
+          <div className="absolute w-3 h-3 bg-gold-400/20 rounded-full animate-float" style={{top: '40%', left: '80%', animationDelay: '1s'}}></div>
+          <div className="absolute w-2 h-2 bg-gold-500/25 rounded-full animate-float" style={{top: '60%', left: '20%', animationDelay: '2s'}}></div>
+          <div className="absolute w-3 h-3 bg-gold-400/30 rounded-full animate-float" style={{top: '80%', left: '70%', animationDelay: '1.5s'}}></div>
+          <div className="absolute w-2 h-2 bg-gold-500/20 rounded-full animate-float" style={{top: '30%', left: '90%', animationDelay: '0.5s'}}></div>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -91,25 +101,40 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative z-10 text-center px-4 py-8"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-bold mb-4 md:mb-6 text-cream-100 leading-tight">
-            Welcome to <span className="text-gradient">Marcova</span>
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-cream-200 mb-6 md:mb-8 max-w-2xl mx-auto px-2">
+          <motion.h1 
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 md:mb-6 text-cream-50 leading-tight drop-shadow-2xl"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Indulge In The Art Of <span className="text-gradient-animate">Homemade Chocolate</span>
+          </motion.h1>
+          <motion.p 
+            className="text-lg sm:text-xl md:text-2xl text-cream-200 mb-6 md:mb-8 max-w-3xl mx-auto px-2 drop-shadow-lg font-light"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             Premium handcrafted chocolates and celebration cakes, made with passion and finest ingredients
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
-            <Link href="/products" className="btn-primary inline-flex items-center justify-center w-full sm:w-auto">
-              Explore Products <FiArrowRight className="ml-2" />
+          </motion.p>
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <Link href="/products" className="btn-primary inline-flex items-center justify-center w-full sm:w-auto group">
+              Explore Products <FiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/about" className="btn-secondary inline-flex items-center justify-center w-full sm:w-auto">
               Our Story
             </Link>
-          </div>
+          </motion.div>
         </motion.div>
       </section>
 
       {/* Featured Products */}
-      <section className="section-padding bg-chocolate-900">
+      <section className="section-padding bg-gradient-to-b from-black via-chocolate-900/30 to-black">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -118,8 +143,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Featured Products</h2>
-            <p className="text-cream-300 text-lg">Handpicked favorites from our collection</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gradient">Featured Products</h2>
+            <p className="text-cream-200 text-lg">Handpicked favorites from our collection</p>
           </motion.div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -143,7 +168,7 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="section-padding bg-chocolate-950">
+      <section className="section-padding bg-gradient-to-b from-black via-chocolate-950/40 to-black">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -152,8 +177,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-8 md:mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 md:mb-4 px-4">Our Categories</h2>
-            <p className="text-cream-300 text-base md:text-lg px-4">Explore our diverse range of premium chocolates</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-3 md:mb-4 px-4 text-gradient">Our Categories</h2>
+            <p className="text-cream-200 text-base md:text-lg px-4">Explore our diverse range of premium chocolates</p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -187,7 +212,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="section-padding bg-gradient-to-b from-chocolate-950 to-chocolate-900">
+      <section className="section-padding bg-gradient-to-b from-black via-chocolate-900/20 to-black">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -197,13 +222,13 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                About <span className="text-gradient">Markova</span>
+                About <span className="text-gradient">Marcova</span>
               </h2>
-              <p className="text-cream-300 text-lg mb-4">
-                At Markova, we believe that chocolate is more than just a treat—it's an experience. Our journey began
+              <p className="text-cream-200 text-lg mb-4">
+                At Marcova, we believe that chocolate is more than just a treat—it's an experience. Our journey began
                 with a passion for creating handcrafted chocolates and celebration cakes that celebrate life's sweetest moments.
               </p>
-              <p className="text-cream-300 text-lg mb-6">
+              <p className="text-cream-200 text-lg mb-6">
                 Every product is carefully crafted using premium ingredients, traditional techniques, and a commitment to
                 sustainability. From our artisanal bar chocolates to our custom celebration cakes, each creation tells a story
                 of quality, craftsmanship, and love.
@@ -219,13 +244,13 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="relative h-96 rounded-xl overflow-hidden"
             >
-              <div className="absolute inset-0 bg-chocolate-800 rounded-xl flex items-center justify-center p-12">
+              <div className="absolute inset-0 bg-gradient-to-br from-chocolate-700/40 to-chocolate-900/40 backdrop-blur-sm rounded-xl flex items-center justify-center p-12 border border-gold-500/20">
                 <div className="relative w-full h-full">
                   <Image 
                     src="/assets/images/logo.png" 
                     alt="Marcova Logo" 
                     fill
-                    className="object-contain"
+                    className="object-contain drop-shadow-2xl"
                   />
                 </div>
               </div>
@@ -235,7 +260,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-chocolate-900">
+      <section className="section-padding bg-gradient-to-b from-black via-chocolate-950/30 to-black">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -244,8 +269,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">What Our Customers Say</h2>
-            <p className="text-cream-300 text-lg">Testimonials from chocolate lovers</p>
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gradient">What Our Customers Say</h2>
+            <p className="text-cream-200 text-lg">Testimonials from chocolate lovers</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -256,15 +281,15 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card"
+                className="card hover:shadow-gold-500/20 hover:border-gold-500/30"
               >
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <FiStar key={i} className="text-gold-500 fill-current" />
+                    <FiStar key={i} className="text-gold-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-cream-300 mb-4 italic">&quot;{testimonial.text}&quot;</p>
-                <p className="font-semibold text-cream-100">— {testimonial.name}</p>
+                <p className="text-cream-200 mb-4 italic">&quot;{testimonial.text}&quot;</p>
+                <p className="font-semibold text-cream-50">— {testimonial.name}</p>
               </motion.div>
             ))}
           </div>
