@@ -81,10 +81,10 @@ export default function Home() {
   return (
     <div className="pt-16 md:pt-20">
       {/* Hero Banner */}
-      <section className="relative min-h-[70vh] md:h-[90vh] flex items-center justify-center overflow-hidden bg-black">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-chocolate-900/50 to-black"></div>
+      <section className="relative min-h-[70vh] md:h-[90vh] flex items-center justify-center overflow-hidden bg-chocolate-950">
+        <div className="absolute inset-0 bg-gradient-to-br from-chocolate-950 via-chocolate-900 to-chocolate-950"></div>
         <div className="absolute inset-0 bg-[url('/images/hero-chocolate.jpg')] bg-cover bg-center opacity-20 animate-pulse"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-chocolate-950/80 via-transparent to-chocolate-950/80"></div>
         
         {/* Floating particles effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="section-padding bg-gradient-to-b from-black via-chocolate-900/30 to-black">
+      <section className="section-padding bg-gradient-to-b from-chocolate-950 via-chocolate-900 to-chocolate-950">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -168,7 +168,7 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="section-padding bg-gradient-to-b from-black via-chocolate-950/40 to-black">
+      <section className="section-padding bg-gradient-to-b from-chocolate-900 via-chocolate-800 to-chocolate-900">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -212,7 +212,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="section-padding bg-gradient-to-b from-black via-chocolate-900/20 to-black">
+      <section className="section-padding bg-gradient-to-b from-chocolate-950 via-chocolate-900 to-chocolate-950">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -260,7 +260,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding bg-gradient-to-b from-black via-chocolate-950/30 to-black">
+      <section className="section-padding bg-gradient-to-b from-chocolate-900 via-chocolate-800 to-chocolate-900">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -5,11 +5,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    @apply bg-black;
+    @apply bg-chocolate-950;
   }
   
   body {
-    @apply bg-gradient-to-b from-black via-chocolate-950 to-chocolate-900 text-cream-50;
+    @apply bg-gradient-to-b from-chocolate-950 via-chocolate-900 to-chocolate-800 text-cream-50;
     background-attachment: fixed;
   }
   

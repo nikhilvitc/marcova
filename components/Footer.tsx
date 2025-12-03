@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gradient-to-b from-black via-chocolate-950/50 to-black border-t border-gold-500/20 mt-20 relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-chocolate-900 via-chocolate-950 to-chocolate-900 border-t border-gold-500/20 mt-20 relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 bg-pattern opacity-30"></div>
       
