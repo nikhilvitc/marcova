@@ -85,8 +85,24 @@ export default function CheckoutPage() {
     setLoading(true)
 
     try {
+      // Generate order number in format: C2503-01 (C for Cake, Year, Month, Order#)
+      const now = new Date()
+      const year = now.getFullYear().toString().slice(-2) // Last 2 digits of year
+      const month = (now.getMonth() + 1).toString().padStart(2, '0') // Month with leading zero
+      
+      // Get count of orders this month to generate sequential number
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+      const { count } = await supabase
+        .from('orders')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', startOfMonth)
+      
+      const orderSequence = ((count || 0) + 1).toString().padStart(2, '0')
+      const orderNumber = `C${year}${month}-${orderSequence}`
+      
       // Prepare order data
       const orderData = {
+        order_number: orderNumber,
         customer_name: formData.name,
         customer_email: formData.email,
         customer_phone: formData.phone,

@@ -13,6 +13,7 @@ $$ language 'plpgsql';
 -- Create orders table
 CREATE TABLE IF NOT EXISTS orders (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  order_number TEXT UNIQUE,
   customer_name TEXT NOT NULL,
   customer_email TEXT NOT NULL,
   customer_phone TEXT,
@@ -28,6 +29,7 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 -- Create index on orders for better performance
+CREATE INDEX IF NOT EXISTS idx_orders_order_number ON orders(order_number);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_customer_email ON orders(customer_email);
 CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at DESC);
@@ -71,8 +73,9 @@ CREATE POLICY "Authenticated users can delete orders"
   USING (true);
 
 -- Insert sample orders
-INSERT INTO orders (customer_name, customer_email, customer_phone, customer_address, items, total_amount, status, payment_status) VALUES
+INSERT INTO orders (order_number, customer_name, customer_email, customer_phone, customer_address, items, total_amount, status, payment_status) VALUES
 (
+  'C2512-01',
   'John Doe',
   'john.doe@example.com',
   '+1-234-567-8901',
@@ -83,6 +86,7 @@ INSERT INTO orders (customer_name, customer_email, customer_phone, customer_addr
   'paid'
 ),
 (
+  'C2512-02',
   'Jane Smith',
   'jane.smith@example.com',
   '+1-234-567-8902',
@@ -93,6 +97,7 @@ INSERT INTO orders (customer_name, customer_email, customer_phone, customer_addr
   'paid'
 ),
 (
+  'C2512-03',
   'Bob Johnson',
   'bob.j@example.com',
   '+1-234-567-8903',

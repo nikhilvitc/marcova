@@ -107,12 +107,18 @@ export default function AdminDashboard() {
                   {topProducts.map((product: any, index: number) => (
                     <div key={index} className="flex items-center justify-between p-3 bg-chocolate-800 rounded-lg">
                       <span className="text-cream-200">{product.name}</span>
-                      <span className="text-gold-500 font-semibold">{product.quantity} sold</span>
+                      <span className={`font-semibold ${
+                        (product.stock || 0) > 10 ? 'text-green-400' : 
+                        (product.stock || 0) > 0 ? 'text-yellow-400' : 
+                        'text-red-400'
+                      }`}>
+                        {product.stock || 0} in stock
+                      </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-cream-400">No sales data available</p>
+                <p className="text-cream-400">No featured products available</p>
               )}
             </div>
 

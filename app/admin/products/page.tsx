@@ -76,6 +76,7 @@ export default function AdminProducts() {
                 <th className="px-6 py-3 text-left text-cream-100 font-semibold">Name</th>
                 <th className="px-6 py-3 text-left text-cream-100 font-semibold">Category</th>
                 <th className="px-6 py-3 text-left text-cream-100 font-semibold">Price</th>
+                <th className="px-6 py-3 text-left text-cream-100 font-semibold">Stock</th>
                 <th className="px-6 py-3 text-left text-cream-100 font-semibold">Featured</th>
                 <th className="px-6 py-3 text-left text-cream-100 font-semibold">Actions</th>
               </tr>
@@ -86,6 +87,11 @@ export default function AdminProducts() {
                   <td className="px-6 py-4 text-cream-200">{product.name}</td>
                   <td className="px-6 py-4 text-cream-300">{product.category}</td>
                   <td className="px-6 py-4 text-gold-500 font-semibold">₹{product.price}</td>
+                  <td className="px-6 py-4">
+                    <span className={`font-semibold ${product.stock > 10 ? 'text-green-400' : product.stock > 0 ? 'text-yellow-400' : 'text-red-400'}`}>
+                      {product.stock || 0} units
+                    </span>
+                  </td>
                   <td className="px-6 py-4 text-cream-300">{product.featured ? 'Yes' : 'No'}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-2">
