@@ -19,6 +19,9 @@ export default function AdminOrders() {
 
   const fetchOrders = async () => {
     try {
+      setLoading(true)
+      setError(null)
+      
       // Try to fetch orders from Supabase
       const { data, error } = await supabase
         .from('orders')
@@ -26,18 +29,28 @@ export default function AdminOrders() {
         .order('created_at', { ascending: false })
       
       if (error) {
+        console.error('Supabase error:', error)
         // If table doesn't exist, show a helpful message
         if (error.code === '42P01') {
-          setError('Orders table not created yet. The orders feature will be available once the table is set up.')
+          setError('Orders table not created yet. Please run the migration SQL in your Supabase dashboard.')
+          toast.error('Orders table not found')
+        } else if (error.code === 'PGRST116') {
+          setError('No orders found or table is empty.')
+          setOrders([])
         } else {
-          throw error
+          setError(`Database error: ${error.message}. Please check your Supabase setup.`)
+          toast.error('Failed to fetch orders')
         }
       } else {
         setOrders(data || [])
+        if (data && data.length === 0) {
+          toast.success('No orders yet')
+        }
       }
     } catch (error: any) {
       console.error('Error fetching orders:', error)
-      setError('Orders table not yet created. This feature is coming soon!')
+      setError(`Connection error: ${error.message}. Please check your database connection.`)
+      toast.error('Failed to connect to database')
     } finally {
       setLoading(false)
     }
