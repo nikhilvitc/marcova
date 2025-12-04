@@ -42,6 +42,12 @@ export default function ProductDetailPage() {
   const handleAddToCart = () => {
     if (!product) return
     
+    // Check if out of stock
+    if (product.stock === 0) {
+      toast.error('This product is currently out of stock')
+      return
+    }
+    
     // Get existing cart from localStorage
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
     
@@ -70,6 +76,8 @@ export default function ProductDetailPage() {
     toast.success(`${product.name} added to cart!`)
     setQuantity(1) // Reset quantity after adding
   }
+  
+  const isOutOfStock = product?.stock === 0
 
   if (loading) {
     return (
@@ -99,11 +107,19 @@ export default function ProductDetailPage() {
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-cover"
+                  className={`object-cover ${isOutOfStock ? 'grayscale opacity-50' : ''}`}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-8xl">🍫</span>
+                  <span className={`text-8xl ${isOutOfStock ? 'grayscale opacity-50' : ''}`}>🍫</span>
+                </div>
+              )}
+              {/* Out of Stock Badge */}
+              {isOutOfStock && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                  <div className="bg-red-600 text-white px-8 py-4 rounded-lg font-bold text-2xl shadow-lg transform rotate-[-12deg]">
+                    OUT OF STOCK
+                  </div>
                 </div>
               )}
             </div>
@@ -111,7 +127,14 @@ export default function ProductDetailPage() {
             {/* Product Details */}
             <div>
               <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">{product.name}</h1>
-              <p className="text-3xl font-bold text-gold-500 mb-6">₹{product.price}</p>
+              <div className="flex items-center gap-4 mb-6">
+                <p className="text-3xl font-bold text-gold-500">₹{product.price}</p>
+                {isOutOfStock && (
+                  <span className="bg-red-600 text-white px-3 py-1 rounded-lg font-semibold text-sm">
+                    Out of Stock
+                  </span>
+                )}
+              </div>
               
               <div className="mb-6">
                 <h2 className="text-xl font-semibold mb-2 text-cream-100">Description</h2>
@@ -127,34 +150,47 @@ export default function ProductDetailPage() {
               )}
 
               {/* Quantity Selector */}
-              <div className="mb-6">
-                <label className="block text-cream-100 mb-2 font-semibold">Quantity</label>
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded-lg transition-colors"
-                  >
-                    -
-                  </button>
-                  <span className="text-xl font-semibold text-cream-100 min-w-[3rem] text-center">
-                    {quantity}
-                  </span>
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded-lg transition-colors"
-                  >
-                    +
-                  </button>
+              {!isOutOfStock && (
+                <div className="mb-6">
+                  <label className="block text-cream-100 mb-2 font-semibold">Quantity</label>
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded-lg transition-colors"
+                    >
+                      -
+                    </button>
+                    <span className="text-xl font-semibold text-cream-100 min-w-[3rem] text-center">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-10 h-10 bg-chocolate-800 hover:bg-chocolate-700 text-cream-100 rounded-lg transition-colors"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <button
                 onClick={handleAddToCart}
-                className="btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2"
+                disabled={isOutOfStock}
+                className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 ${
+                  isOutOfStock
+                    ? 'bg-gray-600 cursor-not-allowed opacity-50'
+                    : 'btn-primary'
+                }`}
               >
                 <FiShoppingCart />
-                Add to Cart
+                {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
               </button>
+              
+              {isOutOfStock && (
+                <p className="mt-4 text-cream-400 text-sm">
+                  This product is currently unavailable. Please check back later!
+                </p>
+              )}
             </div>
           </div>
         </div>

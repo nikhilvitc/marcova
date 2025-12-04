@@ -14,13 +14,22 @@ interface ProductCardProps {
     price: number
     image?: string
     category: string
+    stock?: number
   }
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const isOutOfStock = product.stock === 0
+  
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    
+    // Check if out of stock
+    if (isOutOfStock) {
+      toast.error('This product is currently out of stock')
+      return
+    }
     
     // Get existing cart from localStorage
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
@@ -71,11 +80,19 @@ export default function ProductCard({ product }: ProductCardProps) {
               src={product.image}
               alt={product.name}
               fill
-              className="object-cover group-hover:scale-125 group-hover:rotate-2 transition-all duration-500"
+              className={`object-cover group-hover:scale-125 group-hover:rotate-2 transition-all duration-500 ${isOutOfStock ? 'grayscale opacity-50' : ''}`}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <span className="text-5xl sm:text-6xl animate-float">🍫</span>
+              <span className={`text-5xl sm:text-6xl animate-float ${isOutOfStock ? 'grayscale opacity-50' : ''}`}>🍫</span>
+            </div>
+          )}
+          {/* Out of Stock Badge */}
+          {isOutOfStock && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+              <div className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold text-lg shadow-lg transform rotate-[-12deg]">
+                OUT OF STOCK
+              </div>
             </div>
           )}
           {/* Gradient overlay */}
@@ -93,16 +110,28 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.description}
         </p>
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xl sm:text-2xl font-bold text-gradient-animate">₹{product.price}</span>
+          <div className="flex flex-col">
+            <span className="text-xl sm:text-2xl font-bold text-gradient-animate">₹{product.price}</span>
+            {isOutOfStock && (
+              <span className="text-xs text-red-400 font-semibold">Out of Stock</span>
+            )}
+          </div>
           <button
             onClick={handleAddToCart}
-            className="bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-700 active:from-gold-600 active:to-gold-800 text-black font-bold px-3 sm:px-4 py-2.5 rounded-full transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base shadow-lg shadow-gold-500/40 hover:shadow-xl hover:shadow-gold-500/60 hover:scale-110 active:scale-95 relative overflow-hidden group"
+            disabled={isOutOfStock}
+            className={`${
+              isOutOfStock 
+                ? 'bg-gray-600 cursor-not-allowed opacity-50' 
+                : 'bg-gradient-to-r from-gold-400 to-gold-600 hover:from-gold-500 hover:to-gold-700 active:from-gold-600 active:to-gold-800 shadow-lg shadow-gold-500/40 hover:shadow-xl hover:shadow-gold-500/60 hover:scale-110 active:scale-95'
+            } text-black font-bold px-3 sm:px-4 py-2.5 rounded-full transition-all duration-300 flex items-center gap-1 sm:gap-2 text-sm sm:text-base relative overflow-hidden group`}
             style={{ minHeight: '48px', minWidth: '48px' }}
           >
             <FiShoppingCart className="text-lg relative z-10" />
-            <span className="hidden sm:inline relative z-10">Add</span>
+            <span className="hidden sm:inline relative z-10">{isOutOfStock ? 'Unavailable' : 'Add'}</span>
             {/* Button shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+            {!isOutOfStock && (
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500"></div>
+            )}
           </button>
         </div>
       </div>
